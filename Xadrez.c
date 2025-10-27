@@ -1,48 +1,74 @@
-#include <stdio.h> 
+#include <stdio.h> // Inclui a biblioteca padrão de entrada e saída
 
-int main() { 
-    
-    //Movimento da Torre usando for
-    printf("Movimento da Torre (5 casas para a Direita)");
-    
-    //Torre se move 5 casas.
-    for (int i = 0; i < 5; i++) {
+// --- Funções Recursivas ---
 
-        printf("Direita\n"); // Imprime a direção do movimento.
+
+void moverTorreRecursivo(int casas) {
+    if (casas <= 0) { // Caso base: Não há mais casas para mover
+        return;
     }
-    printf("-----------\n");
-    //Movimento do Bispo, usando while
-    printf("Movimento do Bispo (5 casas na diagonal para Cima e Direita)\n");
-    int casasBispo = 0; // Inicializa um contador para as casas do bispo
-    // O bispo se move enquanto o número de casas for menor que 5.
-    while (casasBispo < 5) {
-        printf("Cima, Direita\n"); // Imprime a combinação de direções para a diagonal
-        casasBispo++;             // Incrementa o contador de casas
-    }
-    
-    printf("-----------\n");
-    //Movimento da Rainha (usando do-while)
-    printf("Movimento da Rainha (8 casas para a Esquerda) \n");
-    int casasRainha = 0; // Inicializa um contador para as casas da rainha
-    // A rainha se move 8 casas.
-    do {
-        printf("Esquerda\n"); // Imprime a direção do movimento
-        casasRainha++;        // Incrementa o contador de casas
-    } while (casasRainha < 8); // Continua o loop enquanto o número de casas for menor que 8
-        printf("-----------\n\n");
-    //Movimento da cavalo usando for
-    printf("Movimento do cavalo (2 casas para baixo e uma para a esquerda)\n");
-    
-    //Cavalo se move 2 casas para baixo e uma para a esquerda.
-    for (int i = 0; i < 2; i++) {
-       
-        printf("Baixo\n");
-       }// Loop 'do-while' para o movimento "Esquerda"
-    int UmaVez = 0; //Variável para rodar uma vez apenas
-    do {
-        printf("Esquerda\n"); //o único movimento
-        UmaVez++;
-    } while (UmaVez < 1);
+    printf("Direita\n"); // Ação: Imprime a direção
+    moverTorreRecursivo(casas - 1); // Chamada recursiva para a próxima casa
+}
 
-    return 0; 
+
+void moverRainhaRecursivo(int casas) {
+    if (casas <= 0) { // Caso base: Não há mais casas para mover
+        return;
+    }
+    printf("Esquerda\n"); // Ação: Imprime a direção
+    moverRainhaRecursivo(casas - 1); // Chamada recursiva para a próxima casa
+}
+
+
+void voidMoverBispoRecursivo(int casas) {
+    if (casas <= 0) { // Caso base: Não há mais casas para mover
+        return;
+    }
+    printf("Cima, Direita\n"); // Ação: Imprime a direção diagonal
+    voidMoverBispoRecursivo(casas - 1); // Chamada recursiva para a próxima casa
+}
+
+int main() {
+    printf("--- Movimentos Complexos de Xadrez (Versão Simplificada) ---\n\n");
+
+    // --- Movimento da Torre (5 casas para a Direita) com Recursividade ---
+    printf("Movimento da Torre (5 casas para a Direita - Recursivo):\n");
+    moverTorreRecursivo(5);
+    printf("-----------\n\n");
+
+    // --- Movimento da Rainha (8 casas para a Esquerda) com Recursividade ---
+    printf("Movimento da Rainha (8 casas para a Esquerda - Recursivo):\n");
+    moverRainhaRecursivo(8);
+    printf("-----------\n\n");
+
+    // Movimento do Bispo (5 casas na diagonal para Cima e Direita) com Loops Aninhados
+   
+    printf("Movimento do Bispo (5 casas Cima, Direita - Loops Aninhados):\n");
+    int casasDiagonaisBispo = 5;
+    for (int i = 0; i < casasDiagonaisBispo; i++) { // Loop externo: cada iteração é um passo diagonal
+        for (int j = 0; j < 1; j++) { // Loop interno: garante que cada passo imprima a direção combinada uma vez
+            printf("Cima, Direita\n");
+        }
+    }
+ 
+    printf("-----------\n\n");
+
+
+    // Movimento do Cavalo (2 casas para Cima e 1 para a Direita) com Loops Aninhados
+    printf("Movimento do Cavalo (2 Cima, 1 Direita - Loops Aninhados Simples):\n");
+    int i, j; // Variáveis de controle para os loops
+
+    // Loop externo para os "passos" do movimento em L
+    for (i = 0; i < 1; i++) { // Executa uma vez para um movimento L completo
+        // Loop interno para os movimentos verticais (2 para Cima)
+        for (j = 0; j < 2; j++) {
+            printf("Cima\n");
+        }
+        // Após os movimentos para cima, imprime o movimento para a direita
+        printf("Direita\n");
+    }
+    printf("-----------\n\n");
+
+    return 0;
 }
